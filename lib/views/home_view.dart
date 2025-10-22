@@ -18,6 +18,14 @@ class HomeView extends StatelessWidget {
               LocalNotifyService.showBasicNotification();
             },
           ),
+          SizedBox(height: 10),
+          CustomListTile(
+            title: "Repeated Notification",
+            onPressedCanceled: () {},
+            onTap: () {
+              LocalNotifyService.showRepeatedNotification();
+            },
+          ),
         ],
       ),
     );

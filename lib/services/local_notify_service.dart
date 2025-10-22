@@ -18,7 +18,7 @@ class LocalNotifyService {
     );
   }
 
-  static void showRepeatedNotification() async {
+  static void showBasicNotification() async {
     NotificationDetails Details = NotificationDetails(
       android: AndroidNotificationDetails(
         "id 1",
@@ -36,7 +36,7 @@ class LocalNotifyService {
     );
   }
 
-  static void showBasicNotification() async {
+  static void showRepeatedNotification() async {
     NotificationDetails Details = NotificationDetails(
       android: AndroidNotificationDetails(
         "id 1",
