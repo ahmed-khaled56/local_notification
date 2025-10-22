@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:local_notifications/services/local_notify_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotifyService.initLocalNotify();
+
   runApp(const MyApp());
 }
 
@@ -21,6 +25,29 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        body: HomeView(),
+      ),
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          ListTile(
+            onTap: () {
+              LocalNotifyService.showBasicNotification();
+            },
+            leading: Icon(Icons.notifications),
+            title: Text("Basic Notification"),
+            trailing: IconButton(onPressed: () {}, icon: Icon(Icons.cancel)),
+          ),
+        ],
       ),
     );
   }

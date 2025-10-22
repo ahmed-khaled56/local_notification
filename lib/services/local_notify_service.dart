@@ -3,13 +3,35 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class LocalNotifyService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  static ontap(NotificationResponse notificationResponse) {}
 
   static Future<void> initLocalNotify() async {
-    InitializationSettings initializationSettings = InitializationSettings(
+    InitializationSettings Settings = InitializationSettings(
       android: AndroidInitializationSettings('mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
     );
 
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    flutterLocalNotificationsPlugin.initialize(
+      Settings,
+      onDidReceiveBackgroundNotificationResponse: ontap,
+      onDidReceiveNotificationResponse: ontap,
+    );
+  }
+
+  static void showBasicNotification() async {
+    NotificationDetails Details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        "id 1",
+        "basic Channel",
+        priority: Priority.high,
+        importance: Importance.max,
+      ),
+    );
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      "basic notification ",
+      "body",
+      Details,
+    );
   }
 }
