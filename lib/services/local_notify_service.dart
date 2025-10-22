@@ -18,7 +18,7 @@ class LocalNotifyService {
     );
   }
 
-  static void showBasicNotification() async {
+  static void showRepeatedNotification() async {
     NotificationDetails Details = NotificationDetails(
       android: AndroidNotificationDetails(
         "id 1",
@@ -30,8 +30,29 @@ class LocalNotifyService {
     await flutterLocalNotificationsPlugin.show(
       0,
       "basic notification ",
-      "body",
+      "Basic body",
       Details,
+      payload: "Payload Data",
+    );
+  }
+
+  static void showBasicNotification() async {
+    NotificationDetails Details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        "id 1",
+        "Repeated Channel",
+        priority: Priority.high,
+        importance: Importance.max,
+      ),
+    );
+    await flutterLocalNotificationsPlugin.periodicallyShow(
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
+      1,
+      'Repeated notification ',
+      'Repeated body',
+      RepeatInterval.everyMinute,
+      Details,
+      payload: "Payload Data",
     );
   }
 }
