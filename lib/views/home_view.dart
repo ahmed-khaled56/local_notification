@@ -11,6 +11,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomListTile(
             title: "Basic Notification",
@@ -28,7 +29,17 @@ class HomeView extends StatelessWidget {
               LocalNotifyService.cancelNotification(id: 1);
             },
             onTap: () {
-              //LocalNotifyService.showRepeatedNotification();
+              LocalNotifyService.showRepeatedNotification();
+            },
+          ),
+          SizedBox(height: 10),
+          CustomListTile(
+            title: "Scheduled Notification",
+            onPressedCanceled: () {
+              LocalNotifyService.cancelNotification(id: 2);
+            },
+            onTap: () {
+              LocalNotifyService.showSchdulNotification();
             },
           ),
         ],
