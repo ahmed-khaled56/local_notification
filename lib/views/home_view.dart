@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:local_notifications/services/local_notify_service.dart';
 import 'package:local_notifications/widgets/custom_listTile.dart';
@@ -13,7 +14,9 @@ class HomeView extends StatelessWidget {
         children: [
           CustomListTile(
             title: "Basic Notification",
-            onPressedCanceled: () {},
+            onPressedCanceled: () {
+              LocalNotifyService.cancelNotification(id: 0);
+            },
             onTap: () {
               LocalNotifyService.showBasicNotification();
             },
@@ -21,9 +24,11 @@ class HomeView extends StatelessWidget {
           SizedBox(height: 10),
           CustomListTile(
             title: "Repeated Notification",
-            onPressedCanceled: () {},
+            onPressedCanceled: () {
+              LocalNotifyService.cancelNotification(id: 1);
+            },
             onTap: () {
-              LocalNotifyService.showRepeatedNotification();
+              //LocalNotifyService.showRepeatedNotification();
             },
           ),
         ],

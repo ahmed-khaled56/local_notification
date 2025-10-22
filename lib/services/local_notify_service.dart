@@ -55,4 +55,8 @@ class LocalNotifyService {
       payload: "Payload Data",
     );
   }
+
+  static void cancelNotification({required int id}) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+  }
 }
