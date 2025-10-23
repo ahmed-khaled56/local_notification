@@ -12,6 +12,7 @@ class HomeView extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomListTile(
             title: "Basic Notification",

@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -67,13 +68,16 @@ class LocalNotifyService {
         importance: Importance.max,
       ),
     );
+
+    final dynamic CurrentTimeZone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(CurrentTimeZone));
     await flutterLocalNotificationsPlugin.zonedSchedule(
       androidScheduleMode: AndroidScheduleMode.alarmClock,
       2,
       "Shcduled notification ",
       "Shcduled body",
 
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10)),
+      tz.TZDateTime(tz.local, 2025, 10, 23, 2, 44),
       Details,
 
       payload: "Payload Data",

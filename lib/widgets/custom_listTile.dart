@@ -18,7 +18,7 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: Icon(Icons.notifications),
-      title: Text(title),
+      title: Text(title, style: TextStyle(fontSize: 20)),
       trailing: IconButton(
         onPressed: onPressedCanceled,
         icon: Icon(Icons.cancel),
