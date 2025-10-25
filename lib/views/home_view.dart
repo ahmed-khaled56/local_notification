@@ -1,12 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:local_notifications/services/local_notify_service.dart';
+import 'package:local_notifications/views/notification_details_screen.dart';
 import 'package:local_notifications/widgets/custom_listTile.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  void ListenNotificationStream() {
+    LocalNotifyService.streamController.stream.listen((notificationResponse) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => NotificationDetailsScreen(
+            notificationResponse: notificationResponse,
+          ),
+        ),
+      );
+    });
+  }
+
+  void initState() {
+    super.initState();
+    ListenNotificationStream();
+  }
+
   Widget build(BuildContext context) {
     return Center(
       child: Column(

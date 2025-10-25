@@ -12,13 +12,17 @@ class NotificationDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Notification Details')),
-      body: Column(
-        children: [
-          Text("${notificationResponse.id}"),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("${notificationResponse.id}"),
 
-          SizedBox(height: 8),
-          Text("${notificationResponse.payload}"),
-        ],
+            SizedBox(height: 8),
+            Text("${notificationResponse.payload}"),
+          ],
+        ),
       ),
     );
   }
