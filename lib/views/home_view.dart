@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:local_notifications/services/local_notify_service.dart';
 import 'package:local_notifications/widgets/custom_listTile.dart';
@@ -42,6 +41,13 @@ class HomeView extends StatelessWidget {
             onTap: () {
               LocalNotifyService.showSchdulNotification();
             },
+          ),
+          SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () {
+              LocalNotifyService.cancelALLNotification();
+            },
+            child: Text("clear all"),
           ),
         ],
       ),

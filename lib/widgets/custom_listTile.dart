@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_notifications/services/local_notify_service.dart';
 
 class CustomListTile extends StatelessWidget {
   final Function()? onTap;

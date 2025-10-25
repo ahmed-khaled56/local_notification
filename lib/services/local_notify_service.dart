@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -6,7 +8,11 @@ import 'package:timezone/data/latest.dart' as tz;
 class LocalNotifyService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-  static ontap(NotificationResponse notificationResponse) {}
+  static StreamController<NotificationResponse> streamController =
+      StreamController();
+  static ontap(NotificationResponse notificationResponse) {
+    streamController.add(notificationResponse);
+  }
 
   static Future<void> initLocalNotify() async {
     InitializationSettings Settings = InitializationSettings(
@@ -68,16 +74,17 @@ class LocalNotifyService {
         importance: Importance.max,
       ),
     );
+    tz.initializeTimeZones();
+    final timeZoneInfo = await FlutterTimezone.getLocalTimezone();
 
-    final dynamic CurrentTimeZone = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(CurrentTimeZone));
+    tz.setLocalLocation(tz.getLocation(timeZoneInfo.identifier));
     await flutterLocalNotificationsPlugin.zonedSchedule(
       androidScheduleMode: AndroidScheduleMode.alarmClock,
       2,
       "Shcduled notification ",
       "Shcduled body",
 
-      tz.TZDateTime(tz.local, 2025, 10, 23, 2, 44),
+      tz.TZDateTime(tz.local, 2025, 10, 25, 14, 10),
       Details,
 
       payload: "Payload Data",
@@ -86,5 +93,11 @@ class LocalNotifyService {
 
   static void cancelNotification({required int id}) async {
     await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  static void cancelALLNotification() async {
+    await flutterLocalNotificationsPlugin.cancel(0);
+    await flutterLocalNotificationsPlugin.cancel(1);
+    await flutterLocalNotificationsPlugin.cancel(2);
   }
 }
